@@ -1,0 +1,19 @@
+[project]
+name = "fist-of-five-server"
+version = "0.0.1"
+description = "Fist to Five, also known as Fist of Five, is a consensus-building technique used in meetings and team settings to gauge the level of agreement among participants. Participants raise their hand showing a number of fingers that corresponds to their level of agreement, from a closed fist (no agreement) to five fingers (full agreement)"
+authors = [
+    {name = "Manish Sharma",email = "mssharmam51@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask (>=3.1.0,<4.0.0)",
+    "sqlalchemy (>=2.0.38,<3.0.0)",
+    "flask-sqlalchemy (>=3.1.1,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
