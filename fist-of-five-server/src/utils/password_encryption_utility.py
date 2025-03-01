@@ -22,6 +22,6 @@ if __name__ == "__main__":
     print("Encryption Key:", key)
 
     # Encrypt a sample password
-    password_to_encrypt = "pscale_pw_gIhDAg3Cub75kOPHIoTzIMKuTaPobIJ1aLC1fV7zgvN"
+    password_to_encrypt = ""
     encrypted = encrypt_password(password_to_encrypt, key)
     print("Encrypted Password:", encrypted)
