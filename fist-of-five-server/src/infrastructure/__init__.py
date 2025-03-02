@@ -43,17 +43,16 @@ if not all([DATABASE_HOST, DATABASE_USERNAME, DATABASE_NAME, encrypted_password]
 # Decrypt the password
 DATABASE_PASSWORD = get_decrypted_password(encrypted_password)
 
-# Build the SQLAlchemy connection string using MySQLdb driver (mysql+mysqldb)
+# Use PyMySQL driver with SSL certificate passed via the query parameter.
 SQLALCHEMY_DATABASE_URI = (
     f"mysql+pymysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}"
+    f"?ssl_ca=/etc/ssl/cert.pem"
 )
 
-# Additional engine options to include Planetscale's SSL and connection settings.
+# Additional engine options (here, only autocommit is passed)
 SQLALCHEMY_ENGINE_OPTIONS = {
     "connect_args": {
-        "ssl": {"ca": "/etc/ssl/cert.pem"},
-        "ssl_mode": "VERIFY_IDENTITY",
-        "autocommit": True
+         "autocommit": True
     }
 }
 

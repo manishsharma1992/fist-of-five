@@ -1,8 +1,17 @@
 import importlib
 import os.path
 
+from alembic import command
+from alembic.config import Config
 from flask import Blueprint, Flask
 from infrastructure import db, SQLALCHEMY_DATABASE_URI
+
+def run_migrations():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    alembic_ini_path = os.path.join(current_dir, "..", "alembic.ini")
+    alembic_cfg = Config(alembic_ini_path)
+    command.upgrade(alembic_cfg, "head")
+    print("Migrations have been run successfully.")
 
 
 def register_blueprints(app, package_name="exposition"):
@@ -38,6 +47,7 @@ def create_app():
 
     db.init_app(app)
     register_blueprints(app)
+    run_migrations()
     return app
 
 if __name__ == "__main__":
