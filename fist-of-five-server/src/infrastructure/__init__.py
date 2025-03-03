@@ -33,6 +33,7 @@ def get_decrypted_password(encrypted_password: str) -> str:
 
 # Read credentials from environment variables
 DATABASE_HOST = os.environ.get('DATABASE_HOST')
+DATABASE_PORT = os.environ.get('DATABASE_PORT')
 DATABASE_USERNAME = os.environ.get('DATABASE_USERNAME')
 DATABASE_NAME = os.environ.get('DATABASE')
 encrypted_password = os.environ.get('DATABASE_PASSWORD')
@@ -45,15 +46,13 @@ DATABASE_PASSWORD = get_decrypted_password(encrypted_password)
 
 # Use PyMySQL driver with SSL certificate passed via the query parameter.
 SQLALCHEMY_DATABASE_URI = (
-    f"mysql+pymysql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}"
-    f"?ssl_ca=/etc/ssl/cert.pem"
+    f"postgresql+psycopg2://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}"
 )
 
 # Additional engine options (here, only autocommit is passed)
 SQLALCHEMY_ENGINE_OPTIONS = {
-    "connect_args": {
-         "autocommit": True
-    }
+    "pool_size": 10,
+    "max_overflow": 20,
 }
 
 # Instantiate the SQLAlchemy Engine
