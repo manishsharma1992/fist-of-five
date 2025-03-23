@@ -21,4 +21,69 @@ body {
 body {
   margin: 0;
   font-family: "Open Sans Regular", sans-serif;
+  app-root {
+    height: -webkit-fill-available !important;
+  }
+}
+
+.white-36-500 {
+  color: #ffffff;
+  font-family: 'Open Sans';
+  letter-spacing: 0.5px;
+  font-size: 2.25rem;
+  font-weight: 500;
+}
+
+.white-14-400 {
+  color: #ffffff;
+  font-family: 'Open Sans';
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.white-12-400 {
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  font-family: 'Open Sans';
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.grey-white-12-400 {
+  color: #a5a5a5;
+  letter-spacing: 0.5px;
+  font-family: 'Open Sans';
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.greenish-grey-12-400 {
+  color: #7b817d;
+  letter-spacing: 0.5px;
+  font-family: 'Open Sans';
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.primary-btn {
+  background: #355147;
+  border-radius: 10px;
+  display: flex;
+-webkit-display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border: unset;
+
+  color: #ffffff;
+  text-align: center !important;
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 14px;
+
+  &:hover {
+    background: #486b60;
+  }
 }
