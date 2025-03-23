@@ -1,6 +1,76 @@
 .login-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f5f5;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      /* top color (40% opacity) */ rgba(0, 0, 0, 0.4)
+        /* bottom color (40% opacity) */
+    ),
+    url("/assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center; /* centers the image within the container */
+  background-size: cover; /* fills the container while preserving aspect ratio */
+
+  /* Force the container to match the full browser viewport */
+  width: 100%;
+  height: 100vh; /* 100% of the viewport height */
+
+  /* Optional flex settings if you need them */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .login-form {
+    display: block;
+    background-color: #fff;
+    padding: 0.9375rem 1.25rem;
+    border-radius: 0.5rem;
+    max-width: 28.125rem;
+    width: 28.125rem;
+    gap: 0.625rem;
+    .form-field-container {
+      gap: 1.25rem;
+      .form-field {
+        width: 100%;
+      }
+    }
+    .login-form-logo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 0.625rem 0.9375rem;
+      img {
+        padding: 0.5rem 0.9375rem;
+        height: 2.25rem;
+      }
+    }
+
+    .btn-login {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: .5rem .3125rem;
+      button {
+        font-family: "Open Sans Semi Bold", sans-serif;
+        font-size: 1rem;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        border: 1px solid #008859;
+        color: #008859;
+        width: 9.625rem;
+        height: 2.625rem;
+
+        &:hover {
+          background-color: #008859;
+          color: #fff;
+          border: none;
+        }
+      }
+    }
+
+    .divider {
+        top: 1.875rem;
+    }
+  }
 }

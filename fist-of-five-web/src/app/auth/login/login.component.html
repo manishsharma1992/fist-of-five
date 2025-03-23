@@ -1,8 +1,36 @@
 <div class="login-section">
-    <form [formGroup]="loginForm">
-        <mat-form-field appearance="outline">
-            <mat-label>E-Mail</mat-label>
-            <input matInput type="email" placeholder="enter e-mail id">          
+  <div class="login-form">
+    <div class="login-form-logo">
+      <img src="/assets/logo/logo-bnp.svg" alt="bnp paribas logo" />
+    </div>
+    <div class="form-field-container">
+      <form [formGroup]="loginForm">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [type]="'email'"
+            formControlName="username"
+            placeholder="Ex:johndoe@bnpparibas.com"
+          />
         </mat-form-field>
-    </form>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="'password'"
+            formControlName="password"
+            placeholder="xxxxxxxxxxxxx"
+          />
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="btn-login">
+      <button type="button" mat-raised-button>Sign In</button>
+    </div>
+    <span class="divider">
+        <mat-divider></mat-divider>
+    </span>
+    
+  </div>
 </div>

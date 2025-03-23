@@ -5,6 +5,8 @@ from alembic import command
 from alembic.config import Config
 from flask import Blueprint, Flask
 from infrastructure import db, SQLALCHEMY_DATABASE_URI
+from utils.cors import CORSMiddleware
+
 
 def run_migrations():
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -44,6 +46,9 @@ def create_app():
     # Set up database configuration from the infrastructure layer.
     app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    # Wrap the Flask WSGI app with the CORS middleware
+    app.wsgi_app = CORSMiddleware(app.wsgi_app)
 
     db.init_app(app)
     register_blueprints(app)
