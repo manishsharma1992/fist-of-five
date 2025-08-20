@@ -1,72 +1,69 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ForbiddenUsernameDirective } from '../../_shared/directives/forbidden-username.directive';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AuthService } from '../../_shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, MatCardModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    ForbiddenUsernameDirective,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  standalone: true
+  standalone: true,
 })
-export class RegisterComponent {
-  loginForm!: FormGroup;
-  isPasswordFocused = false;
-  showPassword: boolean = false;
+export class RegisterComponent implements OnInit {
+  registerForm!: FormGroup;
+  fb = inject(FormBuilder);
+  authService = inject(AuthService);
 
-  constructor(
-    private renderer: Renderer2,
-    private fb: FormBuilder,
-    private cdRef: ChangeDetectorRef
-  ) {
-    console.log("Hi from show password", this.showPassword);
-
-    this.loginForm = this.fb.group({
-      password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+  ngOnInit(): void {
+    this.registerForm = this.fb.group({
+      uid: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required]],
+      role: [''],
     });
   }
 
-  ngOnChanges () {
-  }
-  ngOnInit(): void {
-    this.showPassword = false; // ✅ Explicitly set again
-    this.cdRef.detectChanges();
-
-    throw new Error('Method not implemented.');
-    
-  }
-
-  onPasswordFocus(focus: boolean) {
-    this.isPasswordFocused = focus;
-    const avatar = document.getElementById('userAvatar');
-    if (avatar) {
-      avatar.classList.toggle('focus', focus);
-    }
-  }
-
-  handleInput() {
-    // Optional: Handle input for dynamic animations
-  }
-
-  togglePassVisibility () {
-    this.showPassword = !this.showPassword;
-
-  }
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Form submitted', this.loginForm.value);
-      let body =  {
-        username: this.loginForm.get('email')?.value,
-        password: this.loginForm.get('password')?.value
+  register(): void {
+    if (this.registerForm.valid) {
+      const rawFormValues = this.registerForm.getRawValue();
+      if (!rawFormValues['role']) {
+        rawFormValues['role'] = 'Estimator';
+      } else {
+        rawFormValues['role'] = 'Observer';
       }
 
-      console.log("Hello for login body: ", body);
-      
+      this.authService.registerUser(rawFormValues).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+      });
     }
   }
 }

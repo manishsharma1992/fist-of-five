@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -10,23 +11,25 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 import { TextInputComponent } from '../../_shared/components/input/text-input/text-input.component';
+import { ForbiddenUsernameDirective } from '../../_shared/directives/forbidden-username.directive';
 
 @Component({
   selector: 'app-login',
   imports: [
     ReactiveFormsModule,
+    ForbiddenUsernameDirective,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     MatIconModule,
-    MatDividerModule,
-  ],
+    MatButtonModule
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   standalone: true,
@@ -35,12 +38,16 @@ import { TextInputComponent } from '../../_shared/components/input/text-input/te
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   formBuilder = inject(FormBuilder);
+  hide = signal(true);
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      roleType: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
+  }
+
+  login(): void {
+    
   }
 }
