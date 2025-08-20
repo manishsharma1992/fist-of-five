@@ -4,6 +4,7 @@ import os.path
 from alembic import command
 from alembic.config import Config
 from flask import Blueprint, Flask
+
 from infrastructure import db, SQLALCHEMY_DATABASE_URI
 from utils.cors import CORSMiddleware
 
@@ -54,6 +55,7 @@ def create_app():
     register_blueprints(app)
     run_migrations()
     return app
+
 
 if __name__ == "__main__":
     app = create_app()

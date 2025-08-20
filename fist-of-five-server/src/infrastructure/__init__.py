@@ -1,10 +1,13 @@
 import os
 
+from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-from cryptography.fernet import Fernet
+from sqlalchemy import MetaData, create_engine
+from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
 load_dotenv()
+
 
 def get_encryption_key() -> str:
     """
@@ -56,4 +59,17 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 # Instantiate the SQLAlchemy Engine
-db = SQLAlchemy()
+metadata = MetaData(schema="planning_poker")
+db = SQLAlchemy(metadata=metadata)
+
+# ----- Pure SQLAlchemy engine/session (use in repos/factories) -----
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URI,
+    pool_pre_ping=True,
+    pool_size=10,
+    max_overflow=20,
+)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+
+class Base(DeclarativeBase):
+    metadata = metadata

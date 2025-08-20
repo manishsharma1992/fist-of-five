@@ -1,14 +1,15 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config, pool
-
 from alembic import context
+from sqlalchemy import engine_from_config
 
 from src.infrastructure import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_ENGINE_OPTIONS
 # Import the base metadata from your models.
 # This import ensures that all model definitions are loaded.
 from src.infrastructure import db
-from src.domain.auth.models import User, Role, Permission
+from src.infrastructure.auth.orm.tables import UserRow, PermissionRow, RoleRow
+
+SCHEMA_NAME = "planning_poker"  # single source of truth
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -24,6 +25,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 target_metadata = db.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -47,6 +49,10 @@ def run_migrations_offline() -> None:
     context.configure(
         url=url,
         target_metadata=target_metadata,
+        include_schemas=True,
+        compare_type=True,
+        version_table_schema="planning_poker",  # <-- key line
+        version_table="alembic_version",
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
     )
@@ -66,12 +72,18 @@ def run_migrations_online() -> None:
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
         # poolclass=pool.NullPool,
+        url=SQLALCHEMY_DATABASE_URI,
         **SQLALCHEMY_ENGINE_OPTIONS
     )
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata, compare_type=True
+            connection=connection,
+            target_metadata=target_metadata,
+            include_schemas=True,  # <-- needed
+            compare_type=True,
+            version_table="alembic_version",
+            version_table_schema=SCHEMA_NAME  # <-- needed
         )
 
         with context.begin_transaction():
