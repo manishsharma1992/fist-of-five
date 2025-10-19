@@ -1,3 +1,8 @@
 /fist-of-five-server/**/.idea/*
 /fist-of-five-server/**/__pycache__/*
 /fist-of-five-server/.idea
+
+/fist-of-five-web/node_modules
+/fist-of-five-web/.vscode
+/fist-of-five-web/dist
+
