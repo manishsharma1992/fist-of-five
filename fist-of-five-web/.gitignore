@@ -36,9 +36,8 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+__screenshots__/
 
 # System files
 .DS_Store
 Thumbs.db
-fist-of-five-server/.idea/vcs.xml
-fist-of-five-server/.idea/vcs.xml

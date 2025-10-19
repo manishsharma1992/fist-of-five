@@ -1,20 +1,18 @@
 from logging.config import fileConfig
 
+from sqlalchemy import engine_from_config, text
+from sqlalchemy import pool
+
 from alembic import context
-from sqlalchemy import engine_from_config
 
-from src.infrastructure import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_ENGINE_OPTIONS
-# Import the base metadata from your models.
-# This import ensures that all model definitions are loaded.
-from src.infrastructure import db
-from src.infrastructure.auth.orm.tables import UserRow, PermissionRow, RoleRow
-
-SCHEMA_NAME = "planning_poker"  # single source of truth
+from app.infrastructure.config import settings
+from app.infrastructure.database.base import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option("sqlalchemy.url", SQLALCHEMY_DATABASE_URI)
+
+config.set_main_option('sqlalchemy.url', settings.database_url)
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
@@ -24,8 +22,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = db.metadata
-
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -49,12 +46,10 @@ def run_migrations_offline() -> None:
     context.configure(
         url=url,
         target_metadata=target_metadata,
-        include_schemas=True,
-        compare_type=True,
-        version_table_schema="planning_poker",  # <-- key line
-        version_table="alembic_version",
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        version_table_schema=settings.database_schema,
+        version_table="alembic_version",
     )
 
     with context.begin_transaction():
@@ -62,28 +57,28 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    """Run migrations in 'online' mode.
-
-    In this scenario we need to create an Engine
-    and associate a connection with the context.
-
-    """
+    """Run migrations in 'online' mode."""
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
+        config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
-        # poolclass=pool.NullPool,
-        url=SQLALCHEMY_DATABASE_URI,
-        **SQLALCHEMY_ENGINE_OPTIONS
+        poolclass=pool.NullPool,
     )
 
     with connectable.connect() as connection:
+        # ← ADD THIS: Create schema if it doesn't exist
+        connection.execute(
+            text(f"CREATE SCHEMA IF NOT EXISTS {settings.database_schema}")
+        )
+        connection.commit()
+        # ← END NEW CODE
+
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            include_schemas=True,  # <-- needed
+            version_table_schema=settings.database_schema,
+            include_schemas=True,
             compare_type=True,
             version_table="alembic_version",
-            version_table_schema=SCHEMA_NAME  # <-- needed
         )
 
         with context.begin_transaction():
@@ -91,6 +86,6 @@ def run_migrations_online() -> None:
 
 
 if context.is_offline_mode():
-    raise Exception("Offline mode not supported in this configuration.")
+    run_migrations_offline()
 else:
     run_migrations_online()
