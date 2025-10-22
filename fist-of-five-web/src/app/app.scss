@@ -1,0 +1,35 @@
+.alert-success {
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.alert-error {
+  background-color: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+}
+
+.alert-warning {
+  // Using neutral-variant as a base for warning, but with a shade that provides good contrast.
+  background-color: var(--mat-sys-tertiary-container);
+  color: var(--mat-sys-on-tertiary-container);
+}
+
+.alert-info {
+  // Using a shade from the secondary palette for an info alert.
+  background-color: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+
+.alert-grey {
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+}
+
+.snack-bar-container {
+  border-radius: 0.25rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  @media (min-width: 768px) {
+    max-width: 500px;
+  }
+}

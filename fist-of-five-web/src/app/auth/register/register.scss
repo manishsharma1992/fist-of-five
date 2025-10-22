@@ -1,0 +1,47 @@
+.register-bg {
+  .background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50vh;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+
+    svg {
+      width: 140%;
+      height: auto;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  > :not(.background) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.card {
+  background: rgb(6 5 7 / 25%);
+  -webkit-backdrop-filter: blur(38px);
+  backdrop-filter: blur(38px);
+  box-shadow: 0 40px 30px rgb(0 0 0 / 10%);
+  border-radius: 2.5rem;
+  padding: 0.5rem 1.25rem;
+
+  img {
+    height: 3rem;
+    margin: 1rem 0 2rem;
+  }
+
+  .submit-btn {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+    padding: .5rem;
+    width: clamp(150px, 100%, 300px);
+  }
+}

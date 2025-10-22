@@ -1,0 +1,166 @@
+<div class="container-fluid register-bg d-flex justify-content-center align-items-center h-100">
+  <div class="background">
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      width="100%"
+      height="100%"
+      viewBox="0 0 1600 900"
+    >
+      <defs>
+        <path
+          id="wave"
+          fill="rgba(21,80,54,0.60)"
+          d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+      s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z"
+        />
+      </defs>
+      <g>
+        <use xlink:href="#wave" opacity=".4">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            dur="8s"
+            calcMode="spline"
+            values="270 230; -334 180; 270 230"
+            keyTimes="0; .5; 1"
+            keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+            repeatCount="indefinite"
+          />
+        </use>
+        <use xlink:href="#wave" opacity=".6">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            dur="6s"
+            calcMode="spline"
+            values="-270 230;243 220;-270 230"
+            keyTimes="0; .6; 1"
+            keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+            repeatCount="indefinite"
+          />
+        </use>
+        <use xlink:href="#wave" opacity=".9">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            dur="4s"
+            calcMode="spline"
+            values="0 230;-140 200;0 230"
+            keyTimes="0; .4; 1"
+            keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+            repeatCount="indefinite"
+          />
+        </use>
+      </g>
+    </svg>
+  </div>
+  <mat-card appearance="outlined" class="card">
+    <img mat-card-image src="/images/logo-bnp.svg" alt="BNP Paribas logo" />
+    <mat-card-content>
+      @if(failureResponse) {
+      <app-alert type="error" [message]="failureResponse?.error?.detail"></app-alert>
+      }
+      <form [formGroup]="registrationForm" (ngSubmit)="onRegisterSubmit()">
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>UID</mat-label>
+              <input
+                matInput
+                formControlName="uid"
+                placeholder="Veuillez saisir votre UID"
+                i18n-placeholder="@@employeeIDPlaceholderText"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                type="email"
+                placeholder="veuillez saisir votre identifiant e-mail officiel"
+                i18n-placeholder="@@employeeEmailPlaceholderText"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label i18n="@@firstNameLabel" class="text-capitalize">prénom</mat-label>
+              <input
+                matInput
+                formControlName="first_name"
+                placeholder="veuillez entrer votre prénom"
+                i18n-placeholder="@@firstNamePlaceholderText"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label i18n="@@middleNameLabel" class="text-capitalize"
+                >deuxième prénom</mat-label
+              >
+              <input
+                matInput
+                formControlName="middle_name"
+                placeholder="veuillez saisir votre deuxième prénom (facultatif)"
+                i18n-placeholder="@@middleNamePlaceholderText"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label i18n="@@lastNameLabel" class="text-capitalize">nom de famille</mat-label>
+              <input
+                matInput
+                formControlName="last_name"
+                placeholder="veuillez entrer votre nom de famille"
+                i18n-placeholder="@@lastNamePlaceholderText"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label i18n="@@passwordLabel" class="text-capitalize">mot de passe</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="password"
+              placeholder="veuillez entrer le mot de passe"
+              i18n-placeholder="@@passwordPlaceholderText"
+            />
+          </mat-form-field>
+        </div>
+        <div class="row mb-3">
+          <div class="col d-flex justify-content-center align-items-center w-100">
+            <mat-chip-listbox aria-label="roles to select" formControlName="role">
+              @for(role of roles; track role) {
+              <mat-chip-option
+                ><span class="text-capitalize">{{ role }}</span></mat-chip-option
+              >
+              }
+            </mat-chip-listbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex justify-content-center align-items-center">
+            <button matButton class="submit-btn" type="submit" i18n="@@registerBtnLabel">
+              Se connecter
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
