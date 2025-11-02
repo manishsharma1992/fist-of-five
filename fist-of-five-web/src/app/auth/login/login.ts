@@ -5,16 +5,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+import { Logo } from '../../shared/components/logo/logo';
+import { Waves } from '../../shared/components/waves/waves';
+import { Loader } from '../../shared/services/loader';
 
 @Component({
   selector: 'app-login',
+  providers: [Loader],
   imports: [
+    RouterModule,
     ReactiveFormsModule,
     ForbiddenUsernameDirective,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    Logo, 
+    Waves
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

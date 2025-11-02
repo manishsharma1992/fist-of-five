@@ -1,0 +1,15 @@
+.bnpp-logo {
+  // Size it as needed (e.g., height: 40px; width: auto;)
+  height: 45px; // Matches viewBox height for crispness
+  width: auto;
+
+  // THE MAGIC: Text inherits Material's on-surface color (auto light/dark)
+  color: var(--mat-sys-on-surface);
+
+  // Optional: Ensure SVG scales crisply
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}

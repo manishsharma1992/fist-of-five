@@ -11,7 +11,7 @@
                 <source>prénom</source>
                 <target>first name</target>
             </trans-unit>
-             <trans-unit id="firstNamePlaceholderText" datatype="html">
+            <trans-unit id="firstNamePlaceholderText" datatype="html">
                 <source>veuillez entrer votre prénom</source>
                 <target>please enter your first name</target>
             </trans-unit>
@@ -35,7 +35,7 @@
                 <source>veuillez saisir votre identifiant e-mail officiel</source>
                 <target>please enter your official email ID</target>
             </trans-unit>
-             <trans-unit id="passwordLabel" datatype="html">
+            <trans-unit id="passwordLabel" datatype="html">
                 <source>mot de passe</source>
                 <target>password</target>
             </trans-unit>
@@ -52,8 +52,82 @@
                 <target>estimator</target>
             </trans-unit>
             <trans-unit id="registerBtnLabel" datatype="html">
-                <source>Se connecter</source>
-                <target>Sign In</target>
+                <source>créer mon compte</source>
+                <target>create my account</target>
+            </trans-unit>
+            <trans-unit id="alreadyHaveAccountLink" datatype="html">
+                <source>
+                    <x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>
+                    Vous avez déjà un compte?
+                    <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/auth/&apos;, &apos;login&apos;]&quot; routerLinkActive=&quot;active&quot;&gt;"/>
+                    Connectez-vous ici.
+                    <x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+                    <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/>
+                </source>
+
+                <target>
+                    <x id="START_PARAGRAPH"/>
+                    Already have an account?
+                    <x id="START_LINK"/>
+                        Log in here.<x id="CLOSE_LINK"/>
+                    <x id="CLOSE_PARAGRAPH"/>
+                </target>
+
+                <note priority="1" from="description">
+                        “Log in here.” is a clickable link to the login page. 
+                        The &lt;p&gt; tag is structural only – do not translate it. 
+                        Keep the same order of placeholders.
+                </note>
+
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/auth/register/register.html</context>
+                    <context context-type="linenumber">169,175</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="appTagline" datatype="html">
+                <source>Réunions agiles, simplifiées</source>
+                <target>Agile meetings, made easy</target>
+            </trans-unit>
+            <trans-unit id="appSubTagLine" datatype="html">
+                <source>Des outils spécialement conçus pour les équipes productives.</source>
+                <target>Purpose built tools, for productive teams.</target>
+            </trans-unit>
+            <trans-unit id="registerTitleText" datatype="html">
+                <source>Votre premier sprint productif commence ici</source>
+                <target>Your first productive sprint starts here</target>
+            </trans-unit>
+            <trans-unit id="registrationInProgressMessage" datatype="html">
+                <source>Vous inscrire à World of Productive Sprint, veuillez patienter pendant que nous vous inscrivons</source>
+                <target>Registering you to World of Productive Sprint, please wait while we sign you up</target>
+            </trans-unit>
+            <trans-unit id="registrationSuccessMessage" datatype="html">
+                <source>Congratulations! Your registration was successful. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/auth/&apos;, &apos;login&apos;]&quot;&gt;"/>
+                    You can now log in.<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+                </source>
+                <target>Congratulations! Your registration was successful. <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/auth/&apos;, &apos;login&apos;]&quot;&gt;"/>
+                    You can now log in.<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+                </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/auth/register/register.html</context>
+                    <context context-type="linenumber">79,81</context>
+                </context-group>
+                <note priority="1" from="description">Success message shown after user registers</note>
+            </trans-unit>
+            <trans-unit id="loginCreateAccountLabel" datatype="html">
+                <source>Vous n&apos;êtes pas encore membre ? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/auth/&apos;, &apos;register&apos;]&quot;&gt;"/>Créer un compte<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+                <target>Not a member yet? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/auth/&apos;, &apos;register&apos;]&quot;&gt;"/>Create an account<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/auth/login/login.html</context>
+                    <context context-type="linenumber">96,97</context>
+                </context-group>    
+            </trans-unit>
+            <trans-unit id="forgotPasswordLabel" datatype="html">
+                <source>Mot de passe oublié ?</source>
+                <target>Forgot Password?</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/auth/login/login.html</context>
+                    <context context-type="linenumber">95,96</context>
+                </context-group>
             </trans-unit>
         </body>
     </file>

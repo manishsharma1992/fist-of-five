@@ -22,7 +22,3 @@ app.add_middleware(
 
 # Register routers
 app.include_router(api_v1_router)
-
-@app.get("/")
-def root():
-    return {"message": "Welcome to Planning Poker API"}

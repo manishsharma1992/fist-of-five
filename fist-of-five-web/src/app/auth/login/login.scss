@@ -12,7 +12,6 @@ $color-muted: #4ea078;
   place-items: center;
   min-height: 100svh;
   overflow: hidden;
-  font-family: 'Euclid Circular B', 'Poppins Regular', 'Open Sans Regular', sans-serif;
 
   .background {
     position: absolute;
@@ -24,14 +23,7 @@ $color-muted: #4ea078;
     z-index: 0;
     pointer-events: none;
 
-    svg {
-      width: 140%;
-      height: auto;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+    
   }
 
   > :not(.background) {
@@ -42,13 +34,13 @@ $color-muted: #4ea078;
   .login {
     position: relative;
     z-index: 2;
-    background: rgb(6 5 7 / 25%);
-    -webkit-backdrop-filter: blur(38px);
-    backdrop-filter: blur(38px);
+    background: rgba(90, 89, 91, 0.25);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
     box-shadow: 0 40px 30px rgb(0 0 0 / 10%);
     border-radius: 40px;
     padding: 72px 32px 58px;
-    width: 23.75rem;
+    width: 25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,7 +48,7 @@ $color-muted: #4ea078;
     text-align: center;
   }
 
-  .login img {
+  .login .logo {
     height: 3rem;
     margin: 0 0 2rem;
   }

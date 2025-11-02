@@ -30,7 +30,7 @@ html {
       primary: bnpp-theme.$primary-palette,
       tertiary: bnpp-theme.$tertiary-palette,
     ),
-    typography: "Open Sans",
+    typography: "Euclid Circular B, Poppins, Open Sans, sans-serif",
     density: 0,
   ));
 }
@@ -39,7 +39,7 @@ body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
   // user's system settings.
-  color-scheme: light;
+  color-scheme: light dark;
 
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
@@ -75,4 +75,6 @@ body { margin: 0; font-family: "Euclid Circular B", "Poppins", "Open Sans", sans
 .fade-in-slow {
   animation: fadeIn 2s ease-in-out 0.5s forwards;
 }
+
+.no-break-space::after { content: '\00A0'; }
 

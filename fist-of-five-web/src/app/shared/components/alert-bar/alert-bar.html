@@ -1,0 +1,19 @@
+<div
+  class="alert-bar"
+  [style.background-color]="theme().bg"
+  [style.color]="theme().text"
+  [style.border-left-color]="theme().border"
+>
+  <app-lottie-player
+    [path]="theme().lottiePath"
+    class="alert-icon"
+    [loop]="true"
+    [autoplay]="true"
+  ></app-lottie-player>
+
+  <div class="alert-content">
+    @for(line of messageLines(); track line) {
+    <p>{{ line }}</p>
+    }
+  </div>
+</div>

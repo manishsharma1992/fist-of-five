@@ -60,13 +60,20 @@ class RegisterRequest(BaseModel):
     @classmethod
     def validate_uid_format(cls, v: str) -> str:
         """
-        Validate UID format: [a-z]{1}[0-9]{5}
-        Example: f93328, h99776
+        Validate UID format: [a-zA-Z0-9]{1}[0-9]{5}
+
+        First character: uppercase letter, lowercase letter, or digit
+        Next 5 characters: digits only
+
+        Valid examples:
+        - f93328 (lowercase letter)
+        - H99776 (uppercase letter)
+        - 5123456 (digit)
         """
-        pattern = r'^[a-z]{1}[0-9]{5}$'
+        pattern = r'^[a-zA-Z0-9][0-9]{5}$'
         if not re.match(pattern, v):
             raise ValueError(
-                'UID must be in format: one lowercase letter followed by 5 digits (e.g., f93328)'
+                'UID must be 6 characters: first char (letter or digit), followed by 5 digits (e.g., f93328, H99776, 5123456)'
             )
         return v
 
